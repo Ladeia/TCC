@@ -1,0 +1,24 @@
+<DOCTYPE>
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+  	<section>
+	  <h1>Projeto</h1>
+	  <p>Lorem Ipsum</p>
+	</section>
+	<section>
+	  <h1>Contribua</h1>
+	  	<input type="text" />
+	  	<input type="file" name="datafile" size="40" />
+	  <p>Lorem Ipsum</p>
+	</section>
+	<section>
+	  <h1>Visualize</h1>
+	  <p>Lorem Ipsum</p>
+	</section>
+  </body>
+</html>

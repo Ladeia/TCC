@@ -1,0 +1,36 @@
+<!ELEMENT nota_fiscal (cabecalho,itens,rodape)>
+  <!ELEMENT cabecalho (serie, numero, empresa, comprador, data_emissao)>
+    <!ELEMENT serie (#PCDATA)>
+    <!ELEMENT numero (#PCDATA)>
+    <!ELEMENT empresa (cgc, inscricao_estadual, nome, telefone, endereco, estado)>
+    <!ELEMENT cgc (#PCDATA)>
+    <!ELEMENT inscricao_estadual (#PCDATA)>
+    <!ELEMENT nome (#PCDATA)>
+    <!ELEMENT telefone (#PCDATA)>
+    <!ELEMENT endereco (#PCDATA)>
+    <!ELEMENT estado (#PCDATA)>
+    <!ELEMENT comprador (pj,pf)>
+    <!ELEMENT pj (cgc, inscricao_estadual, nome, telefone, endereco, estado)>
+    <!ELEMENT cgc (#PCDATA)>
+    <!ELEMENT inscricao_estadual (#PCDATA)>
+    <!ELEMENT nome (#PCDATA)>
+    <!ELEMENT telefone (#PCDATA)>
+    <!ELEMENT endereco (#PCDATA)>
+    <!ELEMENT estado (#PCDATA)>
+    <!ELEMENT pf (cic, nome, telefone, endereco)>
+    <!ELEMENT cic (#PCDATA)>
+    <!ELEMENT nome (#PCDATA)>
+    <!ELEMENT telefone (#PCDATA)>
+    <!ELEMENT endereco (#PCDATA)>
+    <!ELEMENT data_emissao (#PCDATA)>
+  <!ELEMENT itens (item+)>
+    <!ELEMENT item (numero_linha, identificador_produto, descricao_produto, quantidade, preco_unitario, preco_total)>
+    <!ELEMENT numero_linha (#PCDATA)>
+    <!ELEMENT identificdor_produto (#PCDATA)>
+    <!ELEMENT descricao_produto (#PCDATA)>
+    <!ELEMENT quantidade (#PCDATA)>
+    <!ELEMENT preco_unitario (#PCDATA)>
+    <!ELEMENT preco_total (#PCDATA)>
+  <!ELEMENT rodape(total_impostos, valor_total_nota_fiscal)>
+    <!ELEMENT total_impostos (#PCDATA)>
+    <!ELEMENT valor_total_nota_fiscal (#PCDATA)>	 

@@ -1,0 +1,9 @@
+   <!ELEMENT measurement (modal, date, sent, iteraction+)>
+	<!ELEMENT modal (#PCDATA)>
+	<!ELEMENT date (#PCDATA)>
+	<!ELEMENT sent (#PCDATA)>
+     <!ELEMENT iteraction (nome, valor)>
+     <!ELEMENT nome (#PCDATA)>
+     <!ELEMENT valor (#PCDATA)>
+  
+ 
