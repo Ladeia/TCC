@@ -90,10 +90,15 @@
 				  <h2>Objetivo</h2>
 				  <p>Captura de informações reais e detalhadas relativas ao ambiente das ruas a partir do uso de bicicletas.</p>
 				</section>
-				
+
 				<section>
-				  <h2>Solução Proposta</h2>
-					<p>Desenvolvimento de um dispositivo usando prioritariamente tecnologias livres que seja replicável e adaptável para capturar e mensurar os dados urbanos e ambientais.</p>
+				  <section>
+					<h2>Solução Proposta</h2>
+					  <p>Desenvolvimento de um dispositivo usando prioritariamente tecnologias livres que seja replicável e adaptável para capturar e mensurar os dados urbanos e ambientais.</p>
+				  </section>
+				  <section>
+					<img src="img/prototipo.jpg" />
+				  </section>
 				</section>
 
 				<section>
@@ -124,9 +129,9 @@
 					  <li>Armazenamento de dados</li>
 					</ul>
 				  </section>
-				  
+
 				  <section>
-				  	<h2>Modelo de dados do Arduíno</h2>
+				  	<h2>Modelo de dados</h2>
 					<pre>
 					<code style="word-wrap: break-word;">{
 "light":"light_value",
@@ -143,6 +148,18 @@
 				  </section>
 				<section>
 					<h2>Exemplo de coleta de dados</h2>
+					<pre>
+					  <code style="word-wrap: break-word;">
+SELECT MAX(id) FROM reads;
+49
+SELECT json FROM json WHERE id_reads = 49 LIMIT 5;
+{"light":"light_value","temperature":"temperature_value","humidity":"humidity_value","distance":"distance_value","longitute":"longitute_value","latitude":"latitude_value","sound":"sound_value","shake":"shake_value"}
+{"light":"light_value","temperature":"temperature_value","humidity":"humidity_value","distance":"distance_value","longitute":"longitute_value","latitude":"latitude_value","sound":"sound_value","shake":"shake_value"}
+{"light":"light_value","temperature":"temperature_value","humidity":"humidity_value","distance":"distance_value","longitute":"longitute_value","latitude":"latitude_value","sound":"sound_value","shake":"shake_value"}
+{"light":"light_value","temperature":"temperature_value","humidity":"humidity_value","distance":"distance_value","longitute":"longitute_value","latitude":"latitude_value","sound":"sound_value","shake":"shake_value"}
+{"light":"light_value","temperature":"temperature_value","humidity":"humidity_value","distance":"distance_value","longitute":"longitute_value","latitude":"latitude_value","sound":"sound_value","shake":"shake_value"}
+					  </code>
+					</pre>
 				</section>
 
 				<section>
@@ -157,6 +174,7 @@
 				  </section>
 				  <section>
 					<h2>Conclusão</h2>
+					<p>O dispositivo mostrou se capaz de captar os dados necessários mostrando que alguns dos fatores, principalmente a distância entre o veículo e a bicicleta que influi diretamente na segurança, são fatores predominantes na relação do uso das pistas pelos ciclistas.</p>
 				  </section>
 				  <section>
 					<h2>Trabalhos futuros</h2>
