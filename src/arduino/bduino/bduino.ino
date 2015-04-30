@@ -16,9 +16,13 @@
 
 // Includes
 #include <dht11.h>
-#include <SoftwareSerial.h>
+#include <TinyGPS.h>
+
+// For use with Arduino uno
+#include "SoftwareSerial.h"
 
 dht11 DHT11;
+TinyGPS gps;
 
 // Defines digital pins
 #define DHT11Pin 2
@@ -34,13 +38,17 @@ dht11 DHT11;
 #define YPin 3
 #define ZPin 4
 
-SoftwareSerial nss(GPSRXPin, GPSTXPin);
+// For use with Arduino uno
+//SoftwareSerial nss(GPSRXPin, GPSTXPin);
 
 void setup() 
 {
     Serial.begin(9600);
-    nss.begin(38400);
-    nss.flush();
+    Serial1.begin(38400);
+    Serial1.flush();
+    // For use with Arduino uno
+    //nss.begin(38400);
+    //nss.flush();
     pinMode(HCTrigPin, OUTPUT);
     pinMode(HCEchoPin, INPUT); 
 }
@@ -142,45 +150,83 @@ int getShakeValue()
     return y;
 }
 
-void sendXMLToSerial()
-{
-    int light = getLightValue();
-    float temperature = getTemperatureValue();
-    float humidity = getHumidityValue();
-    float distance = getDistanceValue();
-    float longitute = (char)nss.read();
-    float latitude = (char)nss.read();
-    int sound = getSoundValue();
-    int shake = getShakeValue();
-    
-      Serial.print("<light>");
-      Serial.print(light);
-      Serial.print("</light> <temperature>");
-      Serial.print (temperature );
-      Serial.print("</temperature> <humidity>:");
-      Serial.print(humidity);
-      Serial.print("</humidity> <distance>");
-      Serial.print(distance);
-      Serial.print("</distance> <longitute>");
-      Serial.print(longitute);
-      Serial.print("</longitute> <latitude>" );
-      Serial.print(latitude);
-      Serial.print("</latitude> <sound>" );
-      Serial.print(sound);
-      Serial.print("</sound> <shake>");
-      Serial.print(shake); 
-      Serial.print("</shake>");
-      Serial.println();
-}
+//void sendXMLToSerial()
+//{
+//    int light = getLightValue();
+//    float temperature = getTemperatureValue();
+//    float humidity = getHumidityValue();
+//    float distance = getDistanceValue();
+//    float longitute = (char)nss.read();
+//    float latitude = (char)nss.read();
+//    int sound = getSoundValue();
+//    int shake = getShakeValue();
+//    
+//      Serial.print("<light>");
+//      Serial.print(light);
+//      Serial.print("</light> <temperature>");
+//      Serial.print (temperature );
+//      Serial.print("</temperature> <humidity>:");
+//      Serial.print(humidity);
+//      Serial.print("</humidity> <distance>");
+//      Serial.print(distance);
+//      Serial.print("</distance> <longitute>");
+//      Serial.print(longitute);
+//      Serial.print("</longitute> <latitude>" );
+//      Serial.print(latitude);
+//      Serial.print("</latitude> <sound>" );
+//      Serial.print(sound);
+//      Serial.print("</sound> <shake>");
+//      Serial.print(shake); 
+//      Serial.print("</shake>");
+//      Serial.println();
+//}
 
 void sendJSONToSerial()
 {
+  char longitute = 'I';
+  char latitude = 'I';
+    
+  if (Serial1.available()) 
+  {
+    bool newData = false;
+    unsigned long chars;
+    unsigned short sentences, failed;
+
+    // Parse GPS data and report some key values
+    for (unsigned long start = millis(); millis() - start < 5;)
+    {
+      while (Serial1.available())
+      {
+        start = millis();
+        char c = Serial1.read();
+        //Serial.write(c); // uncomment this line if you want to see the GPS data flowing
+        if (gps.encode(c)) // Did a new valid sentence come in?
+          newData = true;
+      }
+    }
+
+    if (newData)
+    {
+      float flat, flon;
+      unsigned long age;
+      gps.f_get_position(&flat, &flon, &age);
+      latitude = (flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6);
+      longitute = (flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6);
+    }
+ 
+    // Debug GPS with Serial
+    //gps.stats(&chars, &sentences, &failed);
+    //Serial.print(" CHARS=");
+    //Serial.print(chars);
+    //Serial.print(" SENTENCES=");
+    //Serial.print(sentences);
+    //Serial.print(" CSUM ERR=");
+    //Serial.println(failed);
+  }  
     int light = getLightValue();
     float temperature = getTemperatureValue();
     float humidity = getHumidityValue();
     float distance = getDistanceValue();
-    float longitute = (char)nss.read();
-    float latitude = (char)nss.read();
     int sound = getSoundValue();
     int shake = getShakeValue();
     
