@@ -45,38 +45,40 @@
 					<h3>Um dispositivo para a captura de dados do contexto urbano para o uso da bicicleta.</h3>
 					<p>
 						<small>Graduando: Antonio Fernando Santos Ladeia</small><br />
-						<small>Orientador: Prof. Me. Pablo Vieira Florentino</small>
+						<small>Orientador: Pablo Vieira Florentino</small>
 					</p>
 				</section>
 
 				<section>
 					<h2>Agenda</h2>
 					<ul>
-					  <li class="fragment roll-in">Conceitos básicos</li>
-					  <li class="fragment roll-in">Motivação</li>
-					  <li class="fragment roll-in">Problema</li>
-					  <li class="fragment roll-in">Objetivo</li>
-					  <li class="fragment roll-in">Solução proposta</li>
-					  <li class="fragment roll-in">Trabalhos relacionados</li>
-					  <li class="fragment roll-in">Especificação e validação</li>
-					  <li class="fragment roll-in">Conclusão e trabalhos futuros</li>
+					  <li>Conceitos básicos</li>
+					  <li>Motivação</li>
+					  <li>Problema</li>
+					  <li>Objetivo</li>
+					  <li>Solução proposta</li>
+					  <li>Trabalhos relacionados</li>
+					  <li>Especificação e validação</li>
+					  <li>Conclusão e trabalhos futuros</li>
 					</ul>
 				</section>
 
 				<section>
 				  <h2>Conceitos Básicos</h2>
 					<ul>
-					  <li class="fragment roll-in">Aplicações embarcadas</li>
-					  <li class="fragment roll-in">Captura de dados</li>
-					  <li class="fragment roll-in">Mobilidade</li>
+					  <li>Aplicações embarcadas</li>
+					  <li>Sensores como meio de coleta de aspectos do contexto urbano</li>
+					  <li>Hardware aberto</li>
 					</ul>
 				</section>
 
 				<section>
 				  <h2>Motivação</h2>
 					<ul>
-					  <li class="fragment roll-in">Políticas públicas (falta de)</li>
-					  <li class="fragment roll-in">Desenvolvivento aberto, replicável e adaptável</li>
+					  <li>Desrespeito à algumas leis de trânsito brasileira como a que estabelece 1,5m como distância mínima de ultrapassagem de uma bicicleta</li>
+					  <li>Falta de infraestrutura propícia aos ciclistas</li>
+					  <li>Falta de Políticas públicas para o uso da bicicleta</li>
+					  <li>Desenvolvivento aberto, replicável e adaptável</li>
 					</ul>
 
 				</section>
@@ -94,7 +96,7 @@
 				<section>
 				  <section>
 					<h2>Solução Proposta</h2>
-					  <p>Desenvolvimento de um dispositivo usando prioritariamente tecnologias livres que seja replicável e adaptável para capturar e mensurar os dados urbanos e ambientais.</p>
+					  <p>Desenvolvimento de um dispositivo usando prioritariamente tecnologias livres que seja replicável e adaptável para capturar e mensurar os dados urbanos e ambientais de forma geolocalizada.</p>
 				  </section>
 				  <section>
 					<img src="img/prototipo.jpg" />
@@ -163,6 +165,11 @@ SELECT json FROM json WHERE id_reads = 49 LIMIT 5;
 				</section>
 
 				<section>
+					<h2>Gráfico de quantidade de veículos por distância</h2>
+					<img src="img/graph1.png" />
+				</section>
+
+				<section>
 					<h2>Vídeo</h2>
 				</section>
 			</section>
@@ -174,7 +181,8 @@ SELECT json FROM json WHERE id_reads = 49 LIMIT 5;
 				  </section>
 				  <section>
 					<h2>Conclusão</h2>
-					<p>O dispositivo mostrou se capaz de captar os dados necessários mostrando que alguns dos fatores, principalmente a distância entre o veículo e a bicicleta que influi diretamente na segurança, são fatores predominantes na relação do uso das pistas pelos ciclistas.</p>
+					<p>O dispositivo mostrou se capaz de captar dados georeferenciados que mostram aspectos urbanos, como por exemplo a distância entre o veículos motorizados e a bicicleta. Outros aspectos como temperatura e umidade do ar também são coletados e podem influenciar diretamente a relação do uso das pistas pelos ciclistas.</p>
+					<p>Com esses dados estruturados e georeferenciados, é possível indicar quais áreas mais ou menos propícias para o uso da bicicleta.</p>
 				  </section>
 				  <section>
 					<h2>Trabalhos futuros</h2>
