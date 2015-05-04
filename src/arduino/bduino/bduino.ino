@@ -2,7 +2,7 @@
 // Uma aplicaçao para para captar dados do
 // contexto urbano e/ou natural na perspectiva
 // do uso da bicicleta.
-// Repositório: https://github.com/Ladeia/bduino
+// Repositório: https://github.com/Ladeia/tcc
 
 // Criado por Antonio Ladeia com base em diversos
 // outros codigos encontrados na internet.
@@ -19,7 +19,7 @@
 #include <TinyGPS.h>
 
 // For use with Arduino uno
-#include "SoftwareSerial.h"
+// #include "SoftwareSerial.h"
 
 dht11 DHT11;
 TinyGPS gps;
@@ -41,7 +41,7 @@ TinyGPS gps;
 // For use with Arduino uno
 //SoftwareSerial nss(GPSRXPin, GPSTXPin);
 
-void setup() 
+void setup()
 {
     Serial.begin(9600);
     Serial1.begin(38400);
@@ -50,10 +50,10 @@ void setup()
     //nss.begin(38400);
     //nss.flush();
     pinMode(HCTrigPin, OUTPUT);
-    pinMode(HCEchoPin, INPUT); 
+    pinMode(HCEchoPin, INPUT);
 }
 
-void loop() 
+void loop()
 {
     sendJSONToSerial();
 }
@@ -68,23 +68,23 @@ int getLightValue()
 float getTemperatureValue()
 {
     int chk = DHT11.read(DHT11Pin);
-    
+
     switch (chk)
     {
-      case DHTLIB_OK: 
-  		return ((float)DHT11.temperature, 2);; 
+      case DHTLIB_OK:
+  		return ((float)DHT11.temperature, 2);;
   		break;
-      case DHTLIB_ERROR_CHECKSUM: 
+      case DHTLIB_ERROR_CHECKSUM:
   		return -1;
   		break;
-      case DHTLIB_ERROR_TIMEOUT: 
+      case DHTLIB_ERROR_TIMEOUT:
   		return -2;
   		break;
-      default: 
-  		return -3; 
+      default:
+  		return -3;
   		break;
     }
-    
+
 }
 
 // Pegar o valor do sensor de umidade
@@ -93,16 +93,16 @@ float getHumidityValue()
     int chk = DHT11.read(DHT11Pin);
     switch (chk)
     {
-        case DHTLIB_OK: 
+        case DHTLIB_OK:
             return ((float)DHT11.humidity, 2);
   	    break;
-        case DHTLIB_ERROR_CHECKSUM: 
-  		return -1; 
+        case DHTLIB_ERROR_CHECKSUM:
+  		return -1;
   		break;
-      case DHTLIB_ERROR_TIMEOUT: 
+      case DHTLIB_ERROR_TIMEOUT:
   		return -2;
   		break;
-      default: 
+      default:
   		return -3;
   		break;
     }
@@ -112,27 +112,14 @@ float getHumidityValue()
 // Pegar o valor do sensor de distancia
 float getDistanceValue()
 {
-    digitalWrite(HCTrigPin, LOW);  // Added this line
-    delayMicroseconds(2); // Added this line
+    digitalWrite(HCTrigPin, LOW);
+    delayMicroseconds(2);
     digitalWrite(HCTrigPin, HIGH);
-    //  delayMicroseconds(1000); - Removed this line
-    delayMicroseconds(10); // Added this line
+    delayMicroseconds(10);
     digitalWrite(HCTrigPin, LOW);
     int duration = pulseIn(HCEchoPin, HIGH);
-    
+
     return (duration/2) / 29.1;
-}
-
-// Pegar o valor do sensor de latitude
-int getLatitudeValue()
-{
-    return 0;
-}
-
-// Pegar o valor do sensor de longitude
-int getLongitudeValue()
-{
-    return 0;
 }
 
 // Pegar o valor do sensor de som
@@ -144,9 +131,9 @@ int getSoundValue()
 // Pegar o valor do sensor de trepidacao
 int getShakeValue()
 {
-    int x = analogRead(XPin);   
-    int y = analogRead(YPin);   
-    int z = analogRead(ZPin);  
+    int x = analogRead(XPin);
+    int y = analogRead(YPin);
+    int z = analogRead(ZPin);
     return y;
 }
 
@@ -160,7 +147,7 @@ int getShakeValue()
 //    float latitude = (char)nss.read();
 //    int sound = getSoundValue();
 //    int shake = getShakeValue();
-//    
+//
 //      Serial.print("<light>");
 //      Serial.print(light);
 //      Serial.print("</light> <temperature>");
@@ -176,7 +163,7 @@ int getShakeValue()
 //      Serial.print("</latitude> <sound>" );
 //      Serial.print(sound);
 //      Serial.print("</sound> <shake>");
-//      Serial.print(shake); 
+//      Serial.print(shake);
 //      Serial.print("</shake>");
 //      Serial.println();
 //}
@@ -185,8 +172,8 @@ void sendJSONToSerial()
 {
   char longitute = 'I';
   char latitude = 'I';
-    
-  if (Serial1.available()) 
+
+  if (Serial1.available())
   {
     bool newData = false;
     unsigned long chars;
@@ -213,7 +200,7 @@ void sendJSONToSerial()
       latitude = (flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6);
       longitute = (flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6);
     }
- 
+
     // Debug GPS with Serial
     //gps.stats(&chars, &sentences, &failed);
     //Serial.print(" CHARS=");
@@ -222,14 +209,14 @@ void sendJSONToSerial()
     //Serial.print(sentences);
     //Serial.print(" CSUM ERR=");
     //Serial.println(failed);
-  }  
+  }
     int light = getLightValue();
     float temperature = getTemperatureValue();
     float humidity = getHumidityValue();
     float distance = getDistanceValue();
     int sound = getSoundValue();
     int shake = getShakeValue();
-    
+
       Serial.print("{\"light\":\"");
       Serial.print(light);
       Serial.print("\", \"temperature\":\"");
@@ -245,7 +232,7 @@ void sendJSONToSerial()
       Serial.print("\", \"sound\":\"");
       Serial.print(sound);
       Serial.print("\", \"shake\":\"");
-      Serial.print(shake); 
+      Serial.print(shake);
       Serial.print("\"}");
       Serial.println();
 }
